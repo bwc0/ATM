@@ -7,10 +7,14 @@ public class Account {
     private String accountType, accountNumber, accountStatus, accountName, overDraftPrevention;
     private double balance, interestRate;
 
+    public Ledger ledger;
+    public Transaction transaction;
+
     public Account(String accountType, String accountNumber, String accountName) {
         this.accountType = accountType;
         this.accountNumber = accountNumber;
         this.accountName = accountName;
+        accountStatus = "open";
     }
 
     public String getAccountName() {
@@ -27,6 +31,14 @@ public class Account {
 
     public String getAccountStatus() {
         return this.accountStatus;
+    }
+
+    public Ledger getLedger() {
+        return ledger;
+    }
+
+    public Transaction getTransaction() {
+        return transaction;
     }
 
     public double getBalance() {
@@ -50,7 +62,16 @@ public class Account {
     }
 
     public void setAccountStatus(String accountStatus) {
-        this.accountStatus = accountStatus;
+            this.accountStatus = accountStatus;
+        }
+
+    public void removeDebit(double amountRemove){
+        balance= balance - amountRemove;
+
+    }
+
+    public void addMoney(double amountCredited){
+        balance = balance + amountCredited;
     }
 
     public void setInterestRate(double interestRate) {
@@ -61,38 +82,6 @@ public class Account {
         this.overDraftPrevention = overDraftPrevention;
     }
 
-    public void approved(){
-        System.out.println("Approved");
-    }
-
-    public void denied(){
-        System.out.println("Declined");
-    }
-
-    public double withdrawal(double amount) {
-        if(accountStatus.equals("open")){
-            balance = balance - amount;
-            approved();
-        }else{
-            denied();
-        }
-        return balance;
-    }
-
-    public double deposit(double amount) {
-        if(accountStatus.equals("open")) {
-            balance = balance + amount;
-            approved();
-        }else{
-            denied();
-        }
-        return balance;
-    }
-
-    public void transfer(Account destinationAccount, double transferAmount) {
-        balance = balance - transferAmount;
-        destinationAccount.setBalance(destinationAccount.getBalance() + transferAmount);
-    }
 
 }
 
