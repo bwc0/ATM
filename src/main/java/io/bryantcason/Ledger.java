@@ -2,9 +2,7 @@ package io.bryantcason;
 
 import java.util.ArrayList;
 
-/**
- * Created by bryantcason on 5/19/16.
- */
+
 public class Ledger {
 
 
@@ -29,8 +27,11 @@ public class Ledger {
     }
 
     public void logTransactions(){
-        for(int i = 0; i < ledger.size() - 1; i++) {
-            System.out.print(ledger.get(i));
+        for(Transaction transaction : ledger){
+            System.out.println(transaction.getAmount() + "\n " + transaction.getUniqueFinancialTransNum() + "\n " +
+                transaction.getFinancialTransNum() + "\n " + transaction.getAmount() + "\n " + transaction.getSourceAccountNumber() +
+                    "\n " + transaction.getDestinationAccountNumber() + "\n " + transaction.getTransactionDate() + "\n "
+                    + transaction.getTransactionType());
         }
     }
 }

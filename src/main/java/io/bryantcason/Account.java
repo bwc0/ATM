@@ -1,8 +1,6 @@
 package io.bryantcason;
 
-/**
- * Created by bryantcason on 5/18/16.
- */
+
 public class Account {
     private String accountType, accountNumber, accountStatus, accountName, overDraftPrevention;
     private double balance, interestRate;

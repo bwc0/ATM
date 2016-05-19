@@ -2,48 +2,48 @@ package io.bryantcason;
 
 import java.util.ArrayList;
 
-/**
- * Created by bryantcason on 5/19/16.
- */
+import static io.bryantcason.Prompt.askForString;
+
+
 public class Bank {
 
     static ArrayList<Account> allAccounts;
     Ledger ledger;
     Transaction transaction;
 
-    public Bank(){
+    public Bank() {
 
-        this.allAccounts= new ArrayList<Account>();
+        this.allAccounts = new ArrayList<Account>();
         ledger = new Ledger();
         transaction = new Transaction();
     }
 
-    public void approved(){
+    public void approved() {
         System.out.println("Approved");
     }
 
-    public void denied(){
+    public void denied() {
         System.out.println("Declined");
     }
 
     public void withdrawal(double amount, Account sourceAccount) {
-        if(sourceAccount.getAccountStatus().equals("open")){
+        if (sourceAccount.getAccountStatus().equals("open")) {
             sourceAccount.removeDebit(amount);
             approved();
             Transaction withdrawalTransaction = ledger.createTransaction(amount, "Withdrawal", sourceAccount.getAccountNumber());
             ledger.addTransaction(withdrawalTransaction);
-        }else {
+        } else {
             denied();
         }
     }
 
     public void deposit(double amount, Account sourceAccount) {
-        if(sourceAccount.getAccountStatus().equals("open")) {
+        if (sourceAccount.getAccountStatus().equals("open")) {
             sourceAccount.addMoney(amount);
             approved();
             Transaction depositTransaction = ledger.createTransaction(amount, "Deposit", sourceAccount.getAccountNumber());
             ledger.addTransaction(depositTransaction);
-        }else{
+        } else {
             denied();
         }
     }
@@ -53,4 +53,20 @@ public class Bank {
         deposit(amount, destinationAccount);
     }
 
+    public Account createAccount() {
+        String accountName = askForString("Enter your full name: ");
+        String accountType = askForString("Enter the type of account your are creating(lower case): checking, savings, investment");
+        String accountNumber = askForString("Enter your desired account number: ");
+        allAccounts.add(new Account(accountType, accountNumber, accountName));
+        return new Account(accountType, accountNumber, accountName);
+    }
+
+    public Account findAccount(String number) {
+        for (Account account : allAccounts) {
+            if (account.getAccountNumber().equals(number)) {
+                return account;
+            }
+        }
+         return createAccount();
+    }
 }
