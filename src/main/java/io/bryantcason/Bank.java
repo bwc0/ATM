@@ -57,8 +57,9 @@ public class Bank {
         String accountName = askForString("Enter your full name: ");
         String accountType = askForString("Enter the type of account your are creating(lower case): checking, savings, investment");
         String accountNumber = askForString("Enter your desired account number: ");
-        allAccounts.add(new Account(accountType, accountNumber, accountName));
-        return new Account(accountType, accountNumber, accountName);
+        Account newAccount = (new Account(accountType, accountNumber, accountName));
+        allAccounts.add(newAccount);
+        return newAccount;
     }
 
     public Account findAccount(String number) {
