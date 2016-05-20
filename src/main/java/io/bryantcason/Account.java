@@ -63,15 +63,6 @@ public class Account {
             this.accountStatus = accountStatus;
         }
 
-    public void removeDebit(double amountRemove){
-        balance= balance - amountRemove;
-
-    }
-
-    public void addMoney(double amountCredited){
-        balance = balance + amountCredited;
-    }
-
     public void setInterestRate(double interestRate) {
         this.interestRate = interestRate;
     }
@@ -80,6 +71,14 @@ public class Account {
         this.overDraftPrevention = overDraftPrevention;
     }
 
+    public void removeDebit(double amountRemove){
+        balance= balance - amountRemove;
+
+    }
+
+    public void addMoney(double amountCredited){
+        balance = balance + amountCredited;
+    }
 
 }
 

@@ -40,7 +40,7 @@ public class ATM {
                     bank.transfer(currentAccount, allAccounts.get(usersInt), askForDouble("Enter amount to transfer: "));
                     break;
                 case 7:
-                    currentAccount = bank.findAccount(askForString("Select Account: "));
+                    currentAccount = bank.selectAccount(askForString("Select Account: "));
                     break;
                 case 8:
                     giveMessage("Exit");

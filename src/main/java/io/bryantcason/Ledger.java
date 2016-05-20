@@ -18,7 +18,7 @@ public class Ledger {
         ledger.add(transaction);
     }
 
-    public Transaction createTransctions(double amount, String transactionType, String sourceAccount, String destinationAccount){
+    public Transaction createTransaction(double amount, String transactionType, String sourceAccount, String destinationAccount){
         return (new Transaction(amount,transactionType, sourceAccount, destinationAccount));
     }
 

@@ -62,7 +62,7 @@ public class Bank {
         return newAccount;
     }
 
-    public Account findAccount(String number) {
+    public Account selectAccount(String number) {
         for (Account account : allAccounts) {
             if (account.getAccountNumber().equals(number)) {
                 return account;
