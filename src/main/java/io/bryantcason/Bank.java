@@ -2,7 +2,7 @@ package io.bryantcason;
 
 import java.util.ArrayList;
 
-import static io.bryantcason.Prompt.askForString;
+import static io.bryantcason.Prompt.*;
 
 
 public class Bank {
@@ -27,7 +27,7 @@ public class Bank {
     }
 
     public void withdrawal(double amount, Account sourceAccount) {
-        if (sourceAccount.getAccountStatus().equals("open")) {
+        if (sourceAccount.getAccountStatus().equals("open") && sourceAccount.getBalance() > 0){
             sourceAccount.removeDebit(amount);
             approved();
             Transaction withdrawalTransaction = ledger.createTransaction(amount, "Withdrawal", sourceAccount.getAccountNumber());
@@ -44,6 +44,17 @@ public class Bank {
             Transaction depositTransaction = ledger.createTransaction(amount, "Deposit", sourceAccount.getAccountNumber());
             ledger.addTransaction(depositTransaction);
         } else {
+            denied();
+        }
+    }
+
+    public void closeAccount(Account sourceAccount){
+        if(sourceAccount.getBalance() == 0){
+            giveMessage("Your account has been closed");
+            sourceAccount.setAccountStatus("Closed");
+            approved();
+        } else{
+            giveMessage("Your balance on your account must be 0 to close your account");
             denied();
         }
     }

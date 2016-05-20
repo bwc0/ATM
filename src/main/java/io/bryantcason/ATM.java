@@ -17,7 +17,8 @@ public class ATM {
         while(atmRunning){
             welcomeUser();
 
-            int userChoice = askForInt("Select an option: \n 1. Create Account \n 2. Withdrawal \n 3. Deposit \n 4. Transfer \n 5. Check Balance \n 6. Ledger \n 7. Select Account \n 8. Exit ");
+            int userChoice = askForInt("Select an option: \n 1. Create Account \n 2. Withdrawal \n 3. Deposit \n " +
+                    "4. Transfer \n 5. Check Balance \n 6. Ledger \n 7. Select Account \n 8. Close Account \n 9. Exit ");
 
             switch(userChoice){
                 case 1:
@@ -29,20 +30,24 @@ public class ATM {
                 case 3:
                     bank.deposit(askForDouble("Enter amount to deposit"), currentAccount);
                     break;
+                case 4:
+                    usersInt = askForInt("What is the index of your account? Start from 0: ");
+                    bank.transfer(currentAccount, allAccounts.get(usersInt), askForDouble("Enter amount to transfer: "));
+                    break;
                 case 5:
                     giveMessage("Your balance is " + currentAccount.getBalance());
                     break;
                 case 6:
                     bank.ledger.logTransactions();
                     break;
-                case 4:
-                    usersInt = askForInt("What is the index of your account?");
-                    bank.transfer(currentAccount, allAccounts.get(usersInt), askForDouble("Enter amount to transfer: "));
-                    break;
                 case 7:
                     currentAccount = bank.selectAccount(askForString("Select Account: "));
                     break;
                 case 8:
+                    giveMessage("Closing account ...");
+                    bank.closeAccount(currentAccount);
+                    break;
+                case 9:
                     giveMessage("Exit");
                     atmRunning = false;
 
