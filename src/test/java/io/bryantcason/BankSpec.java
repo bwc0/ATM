@@ -59,4 +59,8 @@ public class BankSpec {
         int after = ledger.getLedger().size();
         assertEquals("Ledger should go up one,", before, after);
     }
+
+
 }
+
+
