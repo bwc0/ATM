@@ -5,8 +5,8 @@ package io.bryantcason;
  */
 public class Savings extends Account{
 
-    public Savings(String accountName, String accountType, String accountNumber){
-        super(accountType, accountNumber, accountName);
+    public Savings(String accountName, String accountType, String accountNumber, double pin){
+        super(accountType, accountNumber, accountName, pin);
 
     }
 

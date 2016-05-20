@@ -5,7 +5,7 @@ package io.bryantcason;
  */
 public class Checking extends Account {
 
-    public Checking(String accountName, String accountNumber, String accountType){
-        super(accountType, accountNumber, accountName);
+    public Checking(String accountName, String accountNumber, String accountType, double pin){
+        super(accountType, accountNumber, accountName, pin);
     }
 }

@@ -68,7 +68,8 @@ public class Bank {
         String accountName = askForString("Enter your full name: ");
         String accountType = askForString("Enter the type of account your are creating(lower case): checking, savings, investment");
         String accountNumber = askForString("Enter your desired account number: ");
-        Account newAccount = (new Account(accountType, accountNumber, accountName));
+        double pin = askForInt("Enter a password: (Numbers only!)");
+        Account newAccount = (new Account(accountType, accountNumber, accountName, pin));
         allAccounts.add(newAccount);
         return newAccount;
     }

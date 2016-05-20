@@ -12,7 +12,7 @@ public class AccountSpec {
     Account account;
     @Test
     public void removeDebitTest(){
-        account = new Account("Checking", "123", "Jet Li");
+        account = new Account("Checking", "123", "Jet Li", 45);
         account.setBalance(1000);
         account.setAccountStatus("open");
         account.removeDebit(500);
@@ -23,7 +23,7 @@ public class AccountSpec {
 
     @Test
     public void addMoneyTest(){
-        account = new Account("Checking", "321", "Jet Li");
+        account = new Account("Checking", "321", "Jet Li", 54);
         account.setBalance(1000);
         account.setAccountStatus("open");
         account.addMoney(500);

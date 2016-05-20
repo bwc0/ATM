@@ -21,7 +21,7 @@ public class BankSpec {
 
     @Test
     public void withdrawalTest() {
-        sourceAccount = new Account("Checking", "564", "Jet Li");
+        sourceAccount = new Account("Checking", "564", "Jet Li", 1);
         sourceAccount.setBalance(1000);
         bank.withdrawal(500, sourceAccount);
         double expectedValue = 500;
@@ -31,7 +31,7 @@ public class BankSpec {
 
     @Test
     public void depositTest(){
-        sourceAccount = new Account("Checking", "543", "Jet Li");
+        sourceAccount = new Account("Checking", "543", "Jet Li", 2);
         sourceAccount.setBalance(1000);
         bank.deposit(500, sourceAccount);
         double expectedValue = 1500;
@@ -41,8 +41,8 @@ public class BankSpec {
 
     @Test
     public void transferTest(){
-        sourceAccount = new Account("Checking", "543", "Jet Li");
-        Account destinationAccount = new Account("Checking", "432", "Jet Li");
+        sourceAccount = new Account("Checking", "543", "Jet Li", 4);
+        Account destinationAccount = new Account("Checking", "432", "Jet Li", 3);
         sourceAccount.setBalance(1000);
         destinationAccount.setBalance(1000);
         bank.transfer(sourceAccount, destinationAccount, 500);
@@ -53,7 +53,7 @@ public class BankSpec {
 
     @Test
     public void ledgerTest(){
-        sourceAccount = new Account("Checking", "546", "Jet Li");
+        sourceAccount = new Account("Checking", "546", "Jet Li", 5);
         int before = ledger.getLedger().size();
         bank.deposit(500, sourceAccount);
         int after = ledger.getLedger().size();
