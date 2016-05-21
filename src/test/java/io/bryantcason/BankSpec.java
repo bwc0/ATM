@@ -48,7 +48,6 @@ public class BankSpec {
         bank.transfer(sourceAccount, destinationAccount, 500);
         assertEquals(sourceAccount.getBalance(), 500, .0);
         assertEquals(destinationAccount.getBalance(), 1500, .0);
-
     }
 
     @Test
@@ -59,8 +58,6 @@ public class BankSpec {
         int after = ledger.getLedger().size();
         assertEquals("Ledger should go up one,", before, after);
     }
-
-
 }
 
 

@@ -18,7 +18,7 @@ public class ATM {
 
 
             int userChoice = askForInt("Select an option: \n 1. Create Account \n 2. Withdrawal \n 3. Deposit \n " +
-                    "4. Transfer \n 5. Check Balance \n 6. Ledger \n 7. Select Account \n 8. Close Account \n 9. Exit ");
+                    "4. Transfer \n 5. Check Balance \n 6. Ledger \n 7. Select Account \n 8. Close Account \n 86. Exit ");
 
             switch(userChoice){
                 case 1:
@@ -47,7 +47,7 @@ public class ATM {
                     giveMessage("Closing account ...");
                     bank.closeAccount(currentAccount);
                     break;
-                case 9:
+                case 86:
                     giveMessage("Exit");
                     atmRunning = false;
 

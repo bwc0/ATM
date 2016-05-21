@@ -1,7 +1,5 @@
 package io.bryantcason;
-
 import java.util.ArrayList;
-
 import static io.bryantcason.Prompt.*;
 
 
