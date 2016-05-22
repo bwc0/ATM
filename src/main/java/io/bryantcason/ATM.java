@@ -42,7 +42,7 @@ public class ATM {
                     bank.ledger.logTransactions();
                     break;
                 case 7:
-                    currentAccount = bank.selectAccount(askForString("Select Account: "));
+                    currentAccount = bank.selectAccount(askForString("Enter the account number: "));
                     break;
                 case 8:
                     giveMessage("Closing account ...");
