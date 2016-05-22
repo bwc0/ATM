@@ -57,7 +57,6 @@ public class ATM {
 
     }
 
-
     public void welcomeUser(){
         giveMessage("Welcome to Kerry Washington's ATM!\n" +
                 ",,,,,,,,,,;#@##@#@@#@#########@@@###########@#@@@@#@@###@####+##++++++++#''''+++++#+++#++++;::::::::\n" +
