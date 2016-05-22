@@ -31,6 +31,7 @@ public class ATM {
                     bank.deposit(askForDouble("Enter amount to deposit"), currentAccount);
                     break;
                 case 4:
+                    //pick account you're transferring to.
                     usersInt = askForInt("What is the index of your account? Start from 0: ");
                     bank.transfer(currentAccount, allAccounts.get(usersInt), askForDouble("Enter amount to transfer: "));
                     break;
