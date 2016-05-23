@@ -28,10 +28,10 @@ public class Ledger {
 
     public void logTransactions(){
         for(Transaction transaction : ledger){
-            System.out.println(transaction.getAmount() + "\n " + transaction.getUniqueFinancialTransNum() + "\n " +
-                transaction.getFinancialTransNum() + "\n " + transaction.getAmount() + "\n " + transaction.getSourceAccountNumber() +
-                    "\n " + transaction.getDestinationAccountNumber() + "\n " + transaction.getTransactionDate() + "\n "
-                    + transaction.getTransactionType());
+            System.out.println(" Amount: " + transaction.getAmount() + "\n UFTN: " + transaction.getUniqueFinancialTransNum() + "\n FTN: " +
+                transaction.getFinancialTransNum() + "\n Destination Account Number: " + transaction.getDestinationAccountNumber() + "\n Source Account Number: " + transaction.getSourceAccountNumber() +
+                    "\n Date: " + transaction.getTransactionDate() + "\n Transaction Type: "
+                    + transaction.getTransactionType() + "\n");
         }
     }
 }

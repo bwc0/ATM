@@ -18,7 +18,7 @@ public class ATM {
 
 
             int userChoice = askForInt("Select an option: \n 1. Create Account \n 2. Withdrawal \n 3. Deposit \n " +
-                    "4. Transfer \n 5. Check Balance \n 6. Ledger \n 7. Select Account \n 8. Close Account \n 86. Exit ");
+                    "4. Transfer \n 5. Check Balance \n 6. Receipt  \n 7. Select Account \n 8. Close Account \n 86. Exit ");
 
             switch(userChoice){
                 case 1:

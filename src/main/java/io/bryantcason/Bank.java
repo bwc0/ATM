@@ -58,8 +58,18 @@ public class Bank {
     }
 
     public void transfer(Account sourceAccount, Account destinationAccount, double amount) {
-        withdrawal(amount, sourceAccount);
-        deposit(amount, destinationAccount);
+        if(sourceAccount.getAccountStatus().equals("open") && sourceAccount.getBalance() > amount) {
+            sourceAccount.removeDebit(amount);
+            destinationAccount.addMoney(amount);
+            approved();
+            Transaction transferTransaction = ledger.createTransaction(amount, "Transfer", sourceAccount.getAccountNumber(),
+                    destinationAccount.getAccountNumber());
+            ledger.addTransaction(transferTransaction);
+        } else{
+            denied();
+            giveMessage("Insufficient funds");
+
+        }
     }
 
     public Account createAccount() {
