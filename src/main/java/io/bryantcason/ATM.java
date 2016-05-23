@@ -18,7 +18,7 @@ public class ATM {
 
 
             int userChoice = askForInt("Select an option: \n 1. Create Account \n 2. Withdrawal \n 3. Deposit \n " +
-                    "4. Transfer \n 5. Check Balance \n 6. Receipt  \n 7. Select Account \n 8. Close Account \n 86. Exit ");
+                    "4. Transfer \n 5. Check Balance \n 6. Receipt \n 7. Select Account \n 8. Close Account \n 86. Exit ");
 
             switch(userChoice){
                 case 1:
@@ -32,7 +32,7 @@ public class ATM {
                     break;
                 case 4:
                     //pick account you're transferring to.
-                    usersInt = askForInt("What is the index of your account? Start from 0: ");
+                    usersInt = askForInt("What account do you want to transfer to? 0. First Account 1. Second Account 2. Third Account: ");
                     bank.transfer(currentAccount, allAccounts.get(usersInt), askForDouble("Enter amount to transfer: "));
                     break;
                 case 5:
