@@ -39,6 +39,22 @@ public class Transaction {
         return transactionDate;
     }
 
+    public void setTransactionType(String transactionType){
+        this.transactionType = transactionType;
+    }
+
+    public void setSourceAccountNumber(String sourceAccountNumber){
+        this.sourceAccountNumber = sourceAccountNumber;
+    }
+
+    public void setDestinationAccountNumber(String destinationAccountNumber){
+        this.destinationAccountNumber = destinationAccountNumber;
+    }
+
+    public void setTransactionDate(String transactionDate){
+        this.transactionDate = transactionDate;
+    }
+
     public Transaction(){}
 
     public Transaction(double amount, String transactionType, String sourceAccount, String destinationAccount) {

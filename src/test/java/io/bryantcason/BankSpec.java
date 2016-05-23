@@ -49,15 +49,6 @@ public class BankSpec {
         assertEquals(sourceAccount.getBalance(), 500, .0);
         assertEquals(destinationAccount.getBalance(), 1500, .0);
     }
-
-    @Test
-    public void ledgerTest(){
-        sourceAccount = new Account("Checking", "546", "Jet Li", 5);
-        int before = ledger.getLedger().size();
-        bank.deposit(500, sourceAccount);
-        int after = ledger.getLedger().size();
-        assertEquals("Ledger should go up one,", before, after);
-    }
 }
 
 
