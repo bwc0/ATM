@@ -1,6 +1,6 @@
 package io.bryantcason.user;
 
-import io.bryantcason.account.Account;
+import io.bryantcason.account.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +25,39 @@ public class User {
         this.username = username;
         this.password = password;
     }
+
+    public User addAccount(Account account) {
+        account.setUser(this);
+        accounts.add(account);
+        return this;
+    }
+
+    public Account openAccount(int choice, double balance, int pin, boolean overdraftProtection) {
+        Account account;
+
+        switch (choice) {
+            case 2: account = new Savings(pin, balance, overdraftProtection);
+                    break;
+            case 3: account = new Investment(pin);
+                    break;
+            default: account = new Checking(pin, balance, overdraftProtection);
+                    break;
+        }
+
+        addAccount(account);
+
+        return account;
+    }
+
+    public boolean closeAccount(Account account) {
+        if (account.getBalance() != 0) {
+            return false;
+        }
+
+        account.setStatus(AccountStatus.CLOSED);
+        return true;
+    }
+
 
     public String getUsername() {
         return username;

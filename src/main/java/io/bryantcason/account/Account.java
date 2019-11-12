@@ -1,7 +1,7 @@
 package io.bryantcason.account;
 
 
-import io.bryantcason.Prompt;
+import io.bryantcason.utils.Prompt;
 import io.bryantcason.user.User;
 
 import java.util.UUID;
@@ -53,36 +53,28 @@ public class Account {
         if (balance < amount) {
 
             if (overDraftProtection) {
-                denied();
                 Prompt.giveMessage("Insufficient funds.");
-
                 return false;
             }
 
             balance = balance - amount - 15;
             Prompt.giveMessage("Account overdraft. You have been charged an additional $15.00. Balance: "
                     + balance);
-
-            approved();
             return true;
         }
 
-        approved();
         balance -= amount;
         return true;
     }
 
     public boolean credit(double amount) {
         if (isClosedOrFrozen(this)) return false;
-
-        approved();
         balance += amount;
         return true;
     }
 
     public boolean transfer(Account source, Account destination, double amount) {
         if (source.getUser() != destination.getUser()) {
-            denied();
             return false;
         }
         if (isClosedOrFrozen(source)) return false;
@@ -95,20 +87,11 @@ public class Account {
 
     private boolean isClosedOrFrozen(Account source) {
         if (source.status == AccountStatus.CLOSED || source.status == AccountStatus.FROZE) {
-            denied();
             Prompt.giveMessage("Sorry! Account: " + source.accountNum + " is " + status);
             return true;
         }
 
         return false;
-    }
-
-    private void approved() {
-        Prompt.giveMessage("Approved");
-    }
-
-    private void denied() {
-        Prompt.giveMessage("Denied");
     }
 
     public AccountType getType() {
