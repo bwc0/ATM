@@ -48,7 +48,7 @@ public class Account {
     }
 
     public boolean debit(double amount) {
-        if (isClosed(this)) return false;
+        if (isClosedOrFrozen(this)) return false;
 
         if (balance < amount) {
 
@@ -73,7 +73,7 @@ public class Account {
     }
 
     public boolean credit(double amount) {
-        if (isClosed(this)) return false;
+        if (isClosedOrFrozen(this)) return false;
 
         approved();
         balance += amount;
@@ -85,20 +85,21 @@ public class Account {
             denied();
             return false;
         }
-        if (isClosed(source)) return false;
-        if (isClosed(destination)) return false;
+        if (isClosedOrFrozen(source)) return false;
+        if (isClosedOrFrozen(destination)) return false;
 
         source.debit(amount);
         destination.credit(amount);
         return true;
     }
 
-    private boolean isClosed(Account source) {
-        if (source.status == AccountStatus.CLOSED) {
+    private boolean isClosedOrFrozen(Account source) {
+        if (source.status == AccountStatus.CLOSED || source.status == AccountStatus.FROZE) {
             denied();
-            Prompt.giveMessage("Sorry! Account (" + source.accountNum + ") is closed");
+            Prompt.giveMessage("Sorry! Account: " + source.accountNum + " is " + status);
             return true;
         }
+
         return false;
     }
 
