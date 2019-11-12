@@ -21,11 +21,8 @@ class AccountTest {
 
         user = new User("username", "password", "User", "Name");
 
-        user.getAccounts().add(account2);
-        user.getAccounts().add(account);
-
-        account2.setUser(user);
-        account.setUser(user);
+        user.addAccount(account);
+        user.addAccount(account2);
     }
 
     @Test
@@ -55,9 +52,17 @@ class AccountTest {
 
     @Test
     @DisplayName("Account should not be deposited with account being closed")
-    void debitTest() {
+    void debitFailedAccountClosedTest() {
         account.setBalance(0);
         account.setStatus(AccountStatus.CLOSED);
+        boolean actualValue = account.debit(500);
+        assertFalse(actualValue);
+    }
+
+    @Test
+    @DisplayName("Account should not be deposited with account being frozen")
+    void debitFailedAccountFrozeTest() {
+        account.setStatus(AccountStatus.FROZE);
         boolean actualValue = account.debit(500);
         assertFalse(actualValue);
     }
