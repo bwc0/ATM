@@ -1,26 +1,32 @@
-package io.bryantcason;
+package io.bryantcason.utils;
 
+import java.io.PrintStream;
 import java.util.Scanner;
 
 
 public class Prompt {
 
-    public static int askForInt(String message){
-        Scanner input = new Scanner(System.in);
-        giveMessage(message);
-        return input.nextInt();
+    private final Scanner scanner;
+    private final PrintStream out;
+
+    public Prompt(Scanner scanner, PrintStream out) {
+        this.scanner = new Scanner(System.in);
+        this.out = out;
     }
 
-    public static double askForDouble(String message){
-        Scanner input = new Scanner(System.in);
+    public int askForInt(String message){
         giveMessage(message);
-        return input.nextDouble();
+        return scanner.nextInt();
     }
 
-    public static String askForString(String message){
-        Scanner input = new Scanner(System.in);
+    public double askForDouble(String message){
         giveMessage(message);
-        return input.nextLine();
+        return scanner.nextDouble();
+    }
+
+    public String askForString(String message){
+        giveMessage(message);
+        return scanner.nextLine();
     }
 
     public static void giveMessage(String message){

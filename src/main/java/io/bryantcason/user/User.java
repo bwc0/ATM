@@ -13,6 +13,9 @@ public class User {
     private String lastName;
     private List<Account> accounts;
 
+    public User() {
+    }
+
     public User(String username, String password, String firstName, String lastName) {
         this.username = username;
         this.password = password;

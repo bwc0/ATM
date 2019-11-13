@@ -74,15 +74,17 @@ public class Account {
     }
 
     public boolean transfer(Account source, Account destination, double amount) {
-        if (source.getUser() != destination.getUser()) {
+        if (source.getUser() != destination.getUser() || isClosedOrFrozen(source) ||
+                isClosedOrFrozen(destination)) {
+            return false;
+        } else {
+            if (source.debit(amount)) {
+                destination.credit(amount);
+                return true;
+            }
+
             return false;
         }
-        if (isClosedOrFrozen(source)) return false;
-        if (isClosedOrFrozen(destination)) return false;
-
-        source.debit(amount);
-        destination.credit(amount);
-        return true;
     }
 
     private boolean isClosedOrFrozen(Account source) {

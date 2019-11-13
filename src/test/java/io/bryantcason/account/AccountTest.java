@@ -95,6 +95,16 @@ class AccountTest {
     }
 
     @Test
+    @DisplayName("Money not should be transferred from one user account to the same user's second account")
+    void transferFailureTransferTest() {
+        boolean actualValue = account.transfer(account, account2, 1500);
+        assertEquals(account.getBalance(), 1000);
+        assertEquals(account2.getBalance(), 1000);
+        assertEquals(account2.getUser().getUsername(), account.getUser().getUsername());
+        assertFalse(actualValue);
+    }
+
+    @Test
     @DisplayName("Money should not be transferred from one user account to the second account")
     void transferFailedTransferTest() {
         account2.setUser(new User("username2", "password2", "User2", "Name2"));

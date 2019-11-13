@@ -1,83 +1,93 @@
-package io.bryantcason;
+package io.bryantcason.utils;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class Transaction {
-    private static int financialTransNum;
-    private int uniqueFinancialTransNum;
+    private UUID financialTransNum;
+    private UUID uniqueFinancialTransNum;
     private double amount;
-    private String transactionType;
-    private String sourceAccountNumber;
-    private String destinationAccountNumber;
+    private TransactionType transactionType;
+    private UUID sourceAccountNumber;
+    private UUID destinationAccountNumber;
     private String transactionDate;
 
-    public int getUniqueFinancialTransNum() {
+    public Transaction(){}
+
+    public Transaction(double amount, TransactionType transactionType, UUID sourceAccount, UUID destinationAccount) {
+        this.amount = amount;
+        this.transactionType = transactionType;
+        this.sourceAccountNumber = sourceAccount;
+        this.destinationAccountNumber = destinationAccount;
+        this.uniqueFinancialTransNum = UUID.randomUUID();
+        this.financialTransNum = UUID.randomUUID();
+        transactionDate = new Date().toString();
+    }
+
+    public Transaction(double amount, TransactionType transactionType, UUID sourceAccount) {
+        this.amount = amount;
+        this.transactionType = transactionType;
+        this.sourceAccountNumber = sourceAccount;
+        this.uniqueFinancialTransNum = UUID.randomUUID();
+        financialTransNum = UUID.randomUUID();
+        transactionDate = new Date().toString();
+    }
+
+    public UUID getFinancialTransNum() {
+        return financialTransNum;
+    }
+
+    public void setFinancialTransNum(UUID financialTransNum) {
+        this.financialTransNum = financialTransNum;
+    }
+
+    public UUID getUniqueFinancialTransNum() {
         return uniqueFinancialTransNum;
     }
 
-    public int getFinancialTransNum() {
-        return financialTransNum;
+    public void setUniqueFinancialTransNum(UUID uniqueFinancialTransNum) {
+        this.uniqueFinancialTransNum = uniqueFinancialTransNum;
     }
 
     public double getAmount() {
         return amount;
     }
 
-    public String getTransactionType() {
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public TransactionType getTransactionType() {
         return transactionType;
     }
 
-    public String getSourceAccountNumber() {
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public UUID getSourceAccountNumber() {
         return sourceAccountNumber;
     }
 
-    public String getDestinationAccountNumber() {
+    public void setSourceAccountNumber(UUID sourceAccountNumber) {
+        this.sourceAccountNumber = sourceAccountNumber;
+    }
+
+    public UUID getDestinationAccountNumber() {
         return destinationAccountNumber;
+    }
+
+    public void setDestinationAccountNumber(UUID destinationAccountNumber) {
+        this.destinationAccountNumber = destinationAccountNumber;
     }
 
     public String getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionType(String transactionType){
-        this.transactionType = transactionType;
-    }
-
-    public void setSourceAccountNumber(String sourceAccountNumber){
-        this.sourceAccountNumber = sourceAccountNumber;
-    }
-
-    public void setDestinationAccountNumber(String destinationAccountNumber){
-        this.destinationAccountNumber = destinationAccountNumber;
-    }
-
-    public void setTransactionDate(String transactionDate){
+    public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
     }
-
-    public Transaction(){}
-
-    public Transaction(double amount, String transactionType, String sourceAccount, String destinationAccount) {
-        this.amount = amount;
-        this.transactionType = transactionType;
-        this.sourceAccountNumber = sourceAccount;
-        this.destinationAccountNumber = destinationAccount;
-        this.uniqueFinancialTransNum = financialTransNum + 1;
-        financialTransNum++;
-        transactionDate = new Date().toString();
-    }
-
-    public Transaction(double amount, String transactionType, String sourceAccount) {
-        this.amount = amount;
-        this.transactionType = transactionType;
-        this.sourceAccountNumber = sourceAccount;
-        this.destinationAccountNumber = "cash";
-        this.uniqueFinancialTransNum = financialTransNum + 1;
-        financialTransNum++;
-        transactionDate = new Date().toString();
-    }
-
-
 }
 
 

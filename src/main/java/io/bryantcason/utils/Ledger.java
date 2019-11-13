@@ -1,12 +1,12 @@
-package io.bryantcason;
+package io.bryantcason.utils;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 public class Ledger {
 
-
-    private ArrayList<Transaction> ledger = new ArrayList<Transaction>();
+    private ArrayList<Transaction> ledger = new ArrayList<>();
 
     public ArrayList<Transaction> getLedger() {
         return ledger;
@@ -17,12 +17,12 @@ public class Ledger {
         ledger.add(transaction);
     }
 
-    public Transaction createTransaction(double amount, String transactionType, String sourceAccount, String destinationAccount) {
-        return (new Transaction(amount, transactionType, sourceAccount, destinationAccount));
+    public Transaction createTransaction(double amount, TransactionType transactionType, UUID sourceAccountNum, UUID destinationAccountNum) {
+        return new Transaction(amount, transactionType, sourceAccountNum, destinationAccountNum);
     }
 
-    public Transaction createTransaction(double amount, String transactionType, String sourceAccount) {
-        return (new Transaction(amount, transactionType, sourceAccount));
+    public Transaction createTransaction(double amount, TransactionType transactionType, UUID sourceAccountNum) {
+        return new Transaction(amount, transactionType, sourceAccountNum);
     }
 
     public void logTransactions() {
