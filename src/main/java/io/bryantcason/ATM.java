@@ -9,7 +9,6 @@ import java.util.InputMismatchException;
 
 import static io.bryantcason.utils.Prompt.*;
 
-
 public class ATM {
 
     private static Prompt prompt = new Prompt();
