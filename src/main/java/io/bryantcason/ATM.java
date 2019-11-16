@@ -164,8 +164,8 @@ public class ATM {
             account = bank.createAccount(user, accountType, pin, balance, overdraft);
 
             giveMessage("Account created");
-        } catch (NumberFormatException nfe) {
-            getExceptionMessage(nfe.getMessage());
+        } catch (InputMismatchException ime) {
+            getExceptionMessage(ime.getMessage());
         }
     }
 
@@ -180,8 +180,8 @@ public class ATM {
                 giveMessage("Current Account:");
                 getAccountInformation(account);
             }
-        } catch (NumberFormatException nfe) {
-            getExceptionMessage(nfe.getMessage());
+        } catch (InputMismatchException ime) {
+            getExceptionMessage(ime.getMessage());
         }
     }
 
@@ -200,8 +200,8 @@ public class ATM {
                 bank.transfer(sourceAccount, destinationAccount);
             }
 
-        } catch(NumberFormatException nfe) {
-            getExceptionMessage(nfe.getMessage());
+        } catch (InputMismatchException ime) {
+            getExceptionMessage(ime.getMessage());
         }
     }
 
@@ -215,8 +215,8 @@ public class ATM {
         try {
             int pin = prompt.askForInt("\nEnter pin for account to close: ");
             bank.closeAccount(bank.selectAccount(user, pin));
-        } catch (NumberFormatException nfe) {
-            getExceptionMessage(nfe.getMessage());
+        } catch (InputMismatchException ime) {
+            getExceptionMessage(ime.getMessage());
         }
     }
 
