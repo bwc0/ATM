@@ -200,7 +200,7 @@ class BankTest {
     @DisplayName("Should select and return account")
     void selectAccountSuccessTest() {
         user.addAccount(sourceAccount);
-        Account actualValue = bank.selectAccount(user, sourceAccount);
+        Account actualValue = bank.selectAccount(user, sourceAccount.getPin());
 
         assertEquals(user, actualValue.getUser());
         assertEquals(sourceAccount.getType(), actualValue.getType());

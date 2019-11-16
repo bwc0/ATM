@@ -6,12 +6,10 @@ import java.util.Scanner;
 
 public class Prompt {
 
-    private final Scanner scanner;
-    private final PrintStream out;
+    private Scanner scanner;
 
-    public Prompt(Scanner scanner, PrintStream out) {
+    public Prompt() {
         this.scanner = new Scanner(System.in);
-        this.out = out;
     }
 
     public int askForInt(String message){
@@ -25,6 +23,7 @@ public class Prompt {
     }
 
     public String askForString(String message){
+        scanner = new Scanner(System.in);
         giveMessage(message);
         return scanner.nextLine();
     }

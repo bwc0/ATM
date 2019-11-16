@@ -1,7 +1,6 @@
 package io.bryantcason;
 import io.bryantcason.account.Account;
 import io.bryantcason.account.AccountStatus;
-import io.bryantcason.account.AccountType;
 import io.bryantcason.user.User;
 import io.bryantcason.utils.Ledger;
 import io.bryantcason.utils.Prompt;
@@ -74,14 +73,12 @@ public class Bank {
     }
 
     public void closeAccount(Account sourceAccount){
-        if(sourceAccount.getBalance() == 0 || sourceAccount.getStatus() != AccountStatus.CLOSED
-                || sourceAccount.getStatus() != AccountStatus.FROZE){
-
+        if(sourceAccount.getBalance() == 0) {
             giveMessage("Your account has been closed");
             sourceAccount.setStatus(AccountStatus.CLOSED);
             approved();
         } else{
-            giveMessage("Your balance on your account must be 0 to close your account");
+            giveMessage("Your balance on your account must be open and balance must be 0 to close.");
             denied();
         }
     }
@@ -93,10 +90,10 @@ public class Bank {
                 overdraftSelection.equals("y") || overdraftSelection.equals("yes"));
     }
 
-    public Account selectAccount(User user, Account temp) {
+    public Account selectAccount(User user, int pin) {
 
         for (Account account : user.getAccounts()) {
-            if (account.getPin() == temp.getPin()) {
+            if (account.getPin() == pin) {
                 return account;
             } else {
                 giveMessage("Account pin is incorrect.");

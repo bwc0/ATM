@@ -87,7 +87,7 @@ public class Account {
         }
     }
 
-    private boolean isClosedOrFrozen(Account source) {
+    public boolean isClosedOrFrozen(Account source) {
         if (source.status == AccountStatus.CLOSED || source.status == AccountStatus.FROZE) {
             Prompt.giveMessage("Sorry! Account: " + source.accountNum + " is " + status);
             return true;
