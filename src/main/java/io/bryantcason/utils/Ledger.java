@@ -27,7 +27,7 @@ public class Ledger {
 
     public void logTransactions() {
         for (Transaction transaction : ledger) {
-            System.out.println("Transaction Type: " + transaction.getTransactionType() + "\n" + "Amount: " + transaction.getAmount() + "\n"
+            System.out.println("\nTransaction Type: " + transaction.getTransactionType() + "\n" + "Amount: " + transaction.getAmount() + "\n"
                     + "UFTN: " + transaction.getUniqueFinancialTransNum() + "\n" + "FTN: " + transaction.getFinancialTransNum() + "\n" +
                     "Destination Account Number: " + transaction.getDestinationAccountNumber() + "\n" + "Source Account Number: " +
                     transaction.getSourceAccountNumber() + "\n" + "Date: " + transaction.getTransactionDate() + "\n");

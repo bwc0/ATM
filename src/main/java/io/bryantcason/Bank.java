@@ -34,7 +34,7 @@ public class Bank {
     }
 
     public void withdrawal(Account sourceAccount) {
-        double withdrawalAmount = prompt.askForDouble("Enter amount to withdrawal: ");
+        double withdrawalAmount = prompt.askForDouble("\nEnter amount to withdrawal: ");
 
         if (!sourceAccount.debit(withdrawalAmount)) {
             denied();
@@ -47,7 +47,7 @@ public class Bank {
     }
 
     public void deposit(Account sourceAccount) {
-        double depositAmount = prompt.askForDouble("Enter amount to deposit: ");
+        double depositAmount = prompt.askForDouble("\nEnter amount to deposit: ");
 
         if (!sourceAccount.credit(depositAmount)) {
             denied();
@@ -59,7 +59,7 @@ public class Bank {
     }
 
     public void transfer(Account sourceAccount, Account destinationAccount) {
-        double transferAmount = prompt.askForDouble("Enter amount to transfer: ");
+        double transferAmount = prompt.askForDouble("\nEnter amount to transfer: ");
 
         if (!sourceAccount.transfer(sourceAccount, destinationAccount, transferAmount)) {
             denied();
@@ -74,11 +74,11 @@ public class Bank {
 
     public void closeAccount(Account sourceAccount){
         if(sourceAccount.getBalance() == 0) {
-            giveMessage("Your account has been closed");
+            giveMessage("\nYour account has been closed");
             sourceAccount.setStatus(AccountStatus.CLOSED);
             approved();
         } else{
-            giveMessage("Your balance on your account must be open and balance must be 0 to close.");
+            giveMessage("\nYour balance on your account must be open and balance must be 0 to close.");
             denied();
         }
     }
@@ -96,7 +96,7 @@ public class Bank {
             if (account.getPin() == pin) {
                 return account;
             } else {
-                giveMessage("Account pin is incorrect.");
+                giveMessage("\nAccount pin is incorrect.");
             }
         }
          return null;
@@ -127,19 +127,19 @@ public class Bank {
     }
 
     private void receipt(Transaction withdrawalTransaction, Account source) {
-        giveMessage("Transaction:\n Amount:" + withdrawalTransaction.getAmount() + "\n Type: "
-                + withdrawalTransaction.getTransactionType() + "\n Transaction Number: " +
-                withdrawalTransaction.getFinancialTransNum() + "\n Source a/n: " +
-                withdrawalTransaction.getSourceAccountNumber() + "\n Balance: " + source.getBalance());
+        giveMessage("\n  Transaction:\n   Amount:" + withdrawalTransaction.getAmount() + "\n   Type: "
+                + withdrawalTransaction.getTransactionType() + "\n   Transaction Number: " +
+                withdrawalTransaction.getFinancialTransNum() + "\n   Source a/n: " +
+                withdrawalTransaction.getSourceAccountNumber() + "\n   Balance: " + source.getBalance());
     }
 
     private void receipt(Transaction withdrawalTransaction, Account source, Account destination) {
-        giveMessage("Transaction:\n Amount:" + withdrawalTransaction.getAmount() + "\n Type: "
-                + withdrawalTransaction.getTransactionType() + "\n Transaction Number: " +
-                withdrawalTransaction.getFinancialTransNum() + "\n Source a/n: " +
-                withdrawalTransaction.getSourceAccountNumber() + "\n Destination a/n: " +
-                withdrawalTransaction.getDestinationAccountNumber() + "\n Source Account Balance: " +
-                source.getBalance() + "\n Destination Account Balance: " + destination.getBalance());
+        giveMessage("\n  Transaction:\n   Amount:" + withdrawalTransaction.getAmount() + "\n   Type: "
+                + withdrawalTransaction.getTransactionType() + "\n   Transaction Number: " +
+                withdrawalTransaction.getFinancialTransNum() + "\n   Source a/n: " +
+                withdrawalTransaction.getSourceAccountNumber() + "\n   Destination a/n: " +
+                withdrawalTransaction.getDestinationAccountNumber() + "\n   Source Account Balance: " +
+                source.getBalance() + "\n   Destination Account Balance: " + destination.getBalance());
     }
 
     public List<User> getUsers() {

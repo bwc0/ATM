@@ -18,97 +18,93 @@ public class ATM {
 
     public void engine() {
 
-        int choice = 0;
+        int choice;
         boolean running = true;
 
         while (running) {
 
-            choice = getChoiceForUserNotSignedIn(choice);
+            choice = getChoiceForUserNotSignedIn();
 
-            while(choice != 0 && running) {
+            while (choice != 0 && running) {
 
-                switch (choice) {
-                    case 1:
-                        newUser();
-                        break;
-                    case 2:
-                        existingUser();
-                        break;
+                if (choice == 2) {
+                    existingUser();
+                } else {
+                    newUser();
                 }
 
                 while (choice != -1 && bank.getUsers().size() != 0) {
-                    choice = getChoiceForSignedInUser(choice);
+
+                    choice = getChoiceForSignedInUser();
 
                     switch (choice) {
                         case 1:
                             newAccount();
                             break;
-
                         case 2:
                             loginAccount();
                             break;
-
                         case 3:
                             if (checkIfAnAccountExist(account)) break;
-
                             getAccountInformation(account);
                             break;
-
                         case 4:
                             if (checkIfAnAccountExist(account)) break;
-
                             giveMessage("Account Number: " + account.getAccountNum() +
-                                "\nBalance: " + account.getBalance());
+                                    "\nBalance: " + account.getBalance());
                             break;
-
                         case 5:
                             if (checkIfAnAccountExist(account)) break;
-                            bank.withdrawal(account);
+                            withdrawal();
                             break;
-
                         case 6:
                             if (checkIfAnAccountExist(account)) break;
-                            bank.deposit(account);
+                            deposit();
                             break;
-
                         case 7:
                             transfer();
                             break;
-
                         case 8:
                             listAccounts();
                             break;
-
                         case 9:
                             closeAccount();
                             break;
-
+                        case 10:
+                            break;
                         case 86:
                             choice = -1;
                             user = null;
                             account = null;
                             break;
+                        default:
+                            giveMessage("Please pick between 1-10.");
+                            break;
                     }
                 }
                 break;
             }
-
         }
     }
 
-    private static int getChoiceForUserNotSignedIn(int choice) {
+    private static int getChoiceForUserNotSignedIn() {
+        int choice = 0;
+
         try {
             choice = prompt.askForInt("1. New User\n" +
-                    "2. Existing User\n" +
-                    "Enter number: ");
+                "2. Existing User\n" +
+                "Enter number: ");
+        } catch (InputMismatchException ime) {
+            getExceptionMessage();
+            prompt.getScanner().next();
         }
-        catch (InputMismatchException ime) {
-            getExceptionMessage(ime.getMessage());
-        }
+
         return choice;
     }
 
-    private static int getChoiceForSignedInUser(int choice) {
+    private static int getChoiceForSignedInUser() {
+        int choice = 0;
+
         try
         {
             choice = prompt.askForInt("\n1. Create Account" +
@@ -123,10 +119,10 @@ public class ATM {
                     "\n10. Profile" +
                     "\n86. Sign-out" +
                     "\nEnter number: ");
-        }
-        catch (InputMismatchException ime)
-        {
-            getExceptionMessage(ime.getMessage());
+
+        } catch (InputMismatchException ime) {
+            getExceptionMessage();
+            prompt.getScanner().next();
         }
 
         return choice;
@@ -139,15 +135,19 @@ public class ATM {
         String lastName = prompt.askForString("Enter last name: ");
 
         user = bank.createUser(username, password, firstName, lastName);
-        giveMessage("Welcome, " + username + "\n");
+        giveMessage("\nWelcome, " + username + "!");
     }
 
     private static void existingUser() {
         String username = prompt.askForString("Enter username: ");
         String password = prompt.askForString("Enter password: ");
 
-        user = bank.selectUser(new User(username, password));
-        giveMessage("Welcome " + user.getUsername() + "\n");
+        try {
+            user = bank.selectUser(new User(username, password));
+            giveMessage("\nWelcome " + user.getUsername() + "!");
+        } catch (NullPointerException npe) {
+            giveMessage("Username/password combination is invalid. Please try again");
+        }
     }
 
     private static void newAccount() {
@@ -164,7 +164,8 @@ public class ATM {
 
             giveMessage("Account created");
         } catch (InputMismatchException ime) {
-            getExceptionMessage(ime.getMessage());
+            getExceptionMessage();
+            prompt.getScanner().next();
         }
     }
 
@@ -176,11 +177,29 @@ public class ATM {
             if  (checkIfAnAccountExist(account)) {
                 giveMessage("Please try again.");
             } else {
-                giveMessage("Current Account:");
                 getAccountInformation(account);
             }
         } catch (InputMismatchException ime) {
-            getExceptionMessage(ime.getMessage());
+            getExceptionMessage();
+            prompt.getScanner().next();
+        }
+    }
+
+    private static void withdrawal() {
+        try {
+            bank.withdrawal(account);
+        } catch (InputMismatchException ime) {
+            getExceptionMessage();
+            prompt.getScanner().next();
+        }
+    }
+
+    private static void deposit() {
+        try {
+            bank.deposit(account);
+        } catch (InputMismatchException ime) {
+            getExceptionMessage();
+            prompt.getScanner().next();
         }
     }
 
@@ -200,7 +219,8 @@ public class ATM {
             }
 
         } catch (InputMismatchException ime) {
-            getExceptionMessage(ime.getMessage());
+            getExceptionMessage();
+            prompt.getScanner().next();
         }
     }
 
@@ -215,27 +235,28 @@ public class ATM {
             int pin = prompt.askForInt("\nEnter pin for account to close: ");
             bank.closeAccount(bank.selectAccount(user, pin));
         } catch (InputMismatchException ime) {
-            getExceptionMessage(ime.getMessage());
+            getExceptionMessage();
         }
     }
 
     private static void getAccountInformation(Account temp) {
-        giveMessage("\nType: " + temp.getType() +
-                "\nAccount Number: " + temp.getAccountNum() +
-                "\nStatus: " + temp.getStatus() +
-                "\nBalance " + temp.getBalance() +
-                "\nOverdraft Protection: " + temp.isOverDraftProtection());
+        giveMessage("\nCurrent Account Information: ");
+        giveMessage("  Type: " + temp.getType() +
+                "\n  Account Number: " + temp.getAccountNum() +
+                "\n  Status: " + temp.getStatus() +
+                "\n  Balance " + temp.getBalance() +
+                "\n  Overdraft Protection: " + temp.isOverDraftProtection());
     }
 
     private static boolean checkIfAnAccountExist(Account account) {
         if (account == null) {
-            giveMessage("You must create or login to an account");
+            giveMessage("You must create or login to an account with correct pin");
             return true;
         }
         return false;
     }
 
-    private static void getExceptionMessage(String message) {
-        Prompt.giveMessage("Must enter a number: " + message);
+    private static void getExceptionMessage() {
+        Prompt.giveMessage("Must enter a number");
     }
 }

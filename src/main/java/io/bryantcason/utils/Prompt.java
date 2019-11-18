@@ -1,6 +1,5 @@
 package io.bryantcason.utils;
 
-import java.io.PrintStream;
 import java.util.Scanner;
 
 
@@ -32,4 +31,7 @@ public class Prompt {
         System.out.println(message);
     }
 
+    public Scanner getScanner() {
+        return scanner;
+    }
 }
