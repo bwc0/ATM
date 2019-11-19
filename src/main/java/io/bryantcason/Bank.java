@@ -95,8 +95,6 @@ public class Bank {
         for (Account account : user.getAccounts()) {
             if (account.getPin() == pin) {
                 return account;
-            } else {
-                giveMessage("\nAccount pin is incorrect.");
             }
         }
          return null;

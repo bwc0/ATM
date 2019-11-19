@@ -46,12 +46,13 @@ public class ATM {
                             break;
                         case 3:
                             if (checkIfAnAccountExist(account)) break;
+                            giveMessage("\nCurrent Account Information: ");
                             getAccountInformation(account);
                             break;
                         case 4:
                             if (checkIfAnAccountExist(account)) break;
-                            giveMessage("Account Number: " + account.getAccountNum() +
-                                    "\nBalance: " + account.getBalance());
+                            giveMessage("  Account Number: " + account.getAccountNum() +
+                                    "\n  Balance: " + account.getBalance());
                             break;
                         case 5:
                             if (checkIfAnAccountExist(account)) break;
@@ -65,12 +66,24 @@ public class ATM {
                             transfer();
                             break;
                         case 8:
+                            giveMessage("\nAccounts: ");
                             listAccounts();
                             break;
                         case 9:
                             closeAccount();
                             break;
                         case 10:
+                            giveMessage("\nUser Information: ");
+                            giveMessage(" name: " + user.getFirstName() + " " + user.getLastName() +
+                                    "\n username: " + user.getUsername());
+
+                            if (user.getAccounts().size() == 0) {
+                                giveMessage(" accounts: " + 0);
+                            } else {
+                                giveMessage(" accounts: ");
+                                listAccounts();
+                            }
+
                             break;
                         case 86:
                             choice = -1;
@@ -212,8 +225,8 @@ public class ATM {
             pin = prompt.askForInt("Which account are you transferring to (enter pin): ");
             Account destinationAccount = bank.selectAccount(user, pin);
 
-            if  (checkIfAnAccountExist(sourceAccount) && checkIfAnAccountExist(destinationAccount)) {
-                giveMessage("Please try again. Something went wrong");
+            if  (checkIfAnAccountExist(sourceAccount) || checkIfAnAccountExist(destinationAccount)) {
+                giveMessage("Please try again.");
             } else {
                 bank.transfer(sourceAccount, destinationAccount);
             }
@@ -240,12 +253,13 @@ public class ATM {
     }
 
     private static void getAccountInformation(Account temp) {
-        giveMessage("\nCurrent Account Information: ");
         giveMessage("  Type: " + temp.getType() +
                 "\n  Account Number: " + temp.getAccountNum() +
                 "\n  Status: " + temp.getStatus() +
                 "\n  Balance " + temp.getBalance() +
                 "\n  Overdraft Protection: " + temp.isOverDraftProtection());
+
+        giveMessage("  -------------");
     }
 
     private static boolean checkIfAnAccountExist(Account account) {
